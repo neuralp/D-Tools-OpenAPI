@@ -1,0 +1,1288 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "D-Tools SI API",
+    "version": "1.0",
+    "description": "Integration Into the D-Tools API",
+    "contact": {
+      "name": "Nicholas Pepper",
+      "email": "neuralp@users.noreply.github.com"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.d-tools.com/SI",
+      "description": "Cloud API Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "project",
+      "description": "Part of the projects"
+    },
+    {
+      "name": "general",
+      "description": "General API usage"
+    }
+  ],
+  "paths": {
+    "/Subscribe/Project": {
+      "get": {
+        "summary": "Get specific project",
+        "tags": [
+          "project"
+        ],
+        "operationId": "get-Subscribe-Project",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "description": "The project id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "coNumber",
+            "description": "coNumber is an optional parameter and is the Change Order Number. For approved project you can pass a change order number to get a specific change order for the approved project."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "aggregateBy",
+            "description": "aggregateBy is an optional parameter and the value can be Item, Location, System or Phase. If aggregateBy is not provided then the project is returned unit wise (not aggregated)."
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": "false"
+            },
+            "in": "query",
+            "name": "getAdjustmentsByItem",
+            "description": "getAdjustmentsByItem is an optional parameter. If true then adjustments are returned with each project item. If false the adjustments are aggreegated and returend as project items."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-DTSI-ApiKey",
+            "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get a specific project for a given project id published by a SI user."
+      },
+      "parameters": []
+    },
+    "/Subscribe/Projects": {
+      "get": {
+        "summary": "Get user projects",
+        "tags": [
+          "project"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectsResult"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-Subscribe-Projects",
+        "description": "Get projects published by a SI user.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-DTSI-ApiKey",
+            "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "clients",
+            "description": "Clients to filter projects (Optional)"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "progresses",
+            "description": "Progresses to filter projects (Optional)"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": "false"
+            },
+            "in": "query",
+            "name": "includeImported",
+            "description": "Boolean. Include already imported projects. Optional with default value false which means by default you will only see projects which are not imported."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "searchText",
+            "description": "The search text."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "pageNumber",
+            "description": "The page number."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "pageSize",
+            "description": "The page size."
+          }
+        ]
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-Subscribe-Projects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpResponseMessage"
+                }
+              }
+            }
+          }
+        },
+        "description": "Mark a project as imported for a given project id.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-DTSI-ApiKey",
+            "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "description": "The project id.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "coNumber",
+            "description": "coNumber is an optional parameter and is the Change Order Number. For approved projects you can pass the change order number."
+          }
+        ],
+        "tags": [
+          "project"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "title": "Address",
+        "type": "object",
+        "properties": {
+          "Street1": {
+            "type": "string"
+          },
+          "Street2": {
+            "type": "string"
+          },
+          "City": {
+            "type": "string"
+          },
+          "State": {
+            "type": "string"
+          },
+          "PostalCode": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "Phone": {
+            "type": "string"
+          },
+          "Fax": {
+            "type": "string"
+          }
+        },
+        "x-tags": [
+          "project"
+        ]
+      },
+      "Contact": {
+        "title": "Contact",
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Phone": {
+            "type": "string"
+          },
+          "IsPrimary": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "Location": {
+        "title": "Location",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "FullName": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ParentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "MiscItem": {
+        "title": "MiscItem",
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Quantity": {
+            "type": "integer"
+          },
+          "UnitPrice": {
+            "type": "number"
+          }
+        }
+      },
+      "PaymentTerm": {
+        "title": "PaymentTerm",
+        "type": "object",
+        "properties": {
+          "Payment": {
+            "type": "string"
+          },
+          "UseFixedAmount": {
+            "type": "boolean"
+          },
+          "BillingPercentage": {
+            "type": "number"
+          },
+          "BillingAmount": {
+            "type": "number"
+          },
+          "BillingDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Project": {
+        "title": "Project",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "Items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectItem"
+            }
+          },
+          "Client": {
+            "type": "string"
+          },
+          "ClientId": {
+            "type": "string"
+          },
+          "ClientNumber": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Number": {
+            "type": "string"
+          },
+          "Progress": {
+            "type": "string"
+          },
+          "AssignedTo": {
+            "type": "string"
+          },
+          "CurrencyCode": {
+            "type": "string"
+          },
+          "CurrencyRate": {
+            "type": "string"
+          },
+          "Cost": {
+            "type": "string"
+          },
+          "PriceWithoutTax": {
+            "type": "string"
+          },
+          "Margin": {
+            "type": "string"
+          },
+          "Markup": {
+            "type": "string"
+          },
+          "Tax": {
+            "type": "string"
+          },
+          "Budget": {
+            "type": "string"
+          },
+          "StartDate": {
+            "type": "string"
+          },
+          "EndDate": {
+            "type": "string"
+          },
+          "ScopeOfWork": {
+            "type": "string"
+          },
+          "Notes": {
+            "type": "string"
+          },
+          "SiteAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "BillingAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "IsItemLevelTax": {
+            "type": "string"
+          },
+          "ProductTaxId": {
+            "type": "string"
+          },
+          "LaborTaxId": {
+            "type": "string"
+          },
+          "Approved": {
+            "type": "string"
+          },
+          "IsChangeOrder": {
+            "type": "string"
+          },
+          "CONumber": {
+            "type": "string"
+          },
+          "COStatus": {
+            "type": "string"
+          },
+          "COType": {
+            "type": "string"
+          },
+          "CONotes": {
+            "type": "string"
+          },
+          "COAcceptedOn": {
+            "type": "string"
+          },
+          "COCreatedOn": {
+            "type": "string"
+          },
+          "CustomField1": {
+            "type": "string"
+          },
+          "CustomField2": {
+            "type": "string"
+          },
+          "CustomField3": {
+            "type": "string"
+          },
+          "CustomField4": {
+            "type": "string"
+          },
+          "CustomField5": {
+            "type": "string"
+          },
+          "CustomField6": {
+            "type": "string"
+          },
+          "CustomField7": {
+            "type": "string"
+          },
+          "CustomField8": {
+            "type": "string"
+          },
+          "CustomField9": {
+            "type": "string"
+          },
+          "CustomField10": {
+            "type": "string"
+          },
+          "CustomField11": {
+            "type": "string"
+          },
+          "CustomField12": {
+            "type": "string"
+          },
+          "CustomField13": {
+            "type": "string"
+          },
+          "CustomField14": {
+            "type": "string"
+          },
+          "CustomField15": {
+            "type": "number"
+          },
+          "CustomField16": {
+            "type": "number"
+          },
+          "CustomField17": {
+            "type": "number"
+          },
+          "CustomField18": {
+            "type": "number"
+          },
+          "CustomField19": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField20": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField21": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField22": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField23": {
+            "type": "boolean"
+          },
+          "CustomField24": {
+            "type": "boolean"
+          },
+          "CustomField25": {
+            "type": "boolean"
+          },
+          "CustomField26": {
+            "type": "boolean"
+          },
+          "Contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contact"
+            }
+          },
+          "Resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            }
+          },
+          "Locations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            }
+          },
+          "Systems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/System"
+            }
+          },
+          "Taxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tax"
+            }
+          },
+          "MiscItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MiscItem"
+            }
+          },
+          "CustomField27": {
+            "type": "string"
+          },
+          "CustomField28": {
+            "type": "string"
+          },
+          "CustomField29": {
+            "type": "string"
+          },
+          "CustomField30": {
+            "type": "string"
+          },
+          "PaymentTerms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentTerm"
+            }
+          },
+          "IntegrationProjectId": {
+            "type": "string"
+          },
+          "IntegrationClientId": {
+            "type": "string"
+          },
+          "ProductPriceType": {
+            "type": "string"
+          },
+          "ClientPONumber": {
+            "type": "string"
+          },
+          "EstimatedCloseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CloseDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "Client"
+        ]
+      },
+      "ProjectItem": {
+        "type": "object",
+        "title": "ProjectItem",
+        "additionalProperties": false,
+        "description": "A project item which can be product or labor or allowance or bundled cable or Placeholder",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "TypeId": {
+            "type": "integer",
+            "default": 1,
+            "minimum": 1,
+            "maximum": 5,
+            "description": "1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder"
+          },
+          "LaborType": {
+            "type": "string"
+          },
+          "Manufacturer": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "PartNumber": {
+            "type": "string"
+          },
+          "Category": {
+            "type": "string"
+          },
+          "Subcategory": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ComponentId": {
+            "type": "string"
+          },
+          "SerialNumber": {
+            "type": "string"
+          },
+          "IPAddress": {
+            "type": "string"
+          },
+          "MACAddress1": {
+            "type": "string"
+          },
+          "MACAddress2": {
+            "type": "string"
+          },
+          "IsOfe": {
+            "type": "boolean"
+          },
+          "IsNonBillable": {
+            "type": "boolean"
+          },
+          "Quantity": {
+            "type": "number"
+          },
+          "UnitCost": {
+            "type": "number"
+          },
+          "UnitPrice": {
+            "type": "number"
+          },
+          "Discount": {
+            "type": "number"
+          },
+          "Phase": {
+            "type": "string"
+          },
+          "LaborHours": {
+            "type": "number"
+          },
+          "ProductAdjustment": {
+            "type": "number"
+          },
+          "MiscPartAdjustment": {
+            "type": "number"
+          },
+          "LaborAdjustment": {
+            "type": "number"
+          },
+          "InstallPrice": {
+            "type": "number"
+          },
+          "IsTaxable": {
+            "type": "boolean"
+          },
+          "TaxId": {
+            "type": "string"
+          },
+          "AvalaraTaxCode": {
+            "type": "string"
+          },
+          "AvalaraLaborTaxCode": {
+            "type": "string"
+          },
+          "AcctgName": {
+            "type": "string"
+          },
+          "Vendor": {
+            "type": "string"
+          },
+          "LocationId": {
+            "type": "string"
+          },
+          "SystemId": {
+            "type": "string"
+          },
+          "ParentId": {
+            "type": "string"
+          },
+          "CatelogId": {
+            "type": "string"
+          },
+          "OrderStatus": {
+            "type": "string"
+          },
+          "OrderNumber": {
+            "type": "string"
+          },
+          "OrderedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ExpectedDeliveryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ReceivedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Picked": {
+            "type": "boolean"
+          },
+          "Installed": {
+            "type": "boolean"
+          },
+          "InstalledDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "InstalledNotes": {
+            "type": "string"
+          },
+          "CustomField1": {
+            "type": "string"
+          },
+          "CustomField2": {
+            "type": "string"
+          },
+          "CustomField3": {
+            "type": "string"
+          },
+          "CustomField4": {
+            "type": "string"
+          },
+          "CustomField5": {
+            "type": "string"
+          },
+          "CustomField6": {
+            "type": "number"
+          },
+          "CustomField7": {
+            "type": "number"
+          },
+          "CustomField8": {
+            "type": "number"
+          },
+          "CustomField9": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField10": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField11": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField12": {
+            "type": "string"
+          },
+          "CustomField13": {
+            "type": "string"
+          },
+          "CustomField14": {
+            "type": "string"
+          },
+          "COChangeTypeId": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2,
+            "description": "1 = Added on Change Order, 2 = Deleted on Change Order."
+          },
+          "PackageName": {
+            "type": "string"
+          },
+          "IPAddress2": {
+            "type": "string"
+          },
+          "BulkWire": {
+            "type": "boolean"
+          },
+          "PickedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "TrackingNumber": {
+            "type": "string"
+          },
+          "SIItemId": {
+            "type": "string"
+          },
+          "CustomField15": {
+            "type": "string"
+          },
+          "CustomField16": {
+            "type": "string"
+          },
+          "CustomField17": {
+            "type": "string"
+          },
+          "CustomField18": {
+            "type": "string"
+          },
+          "CustomField19": {
+            "type": "boolean"
+          },
+          "CustomField20": {
+            "type": "boolean"
+          },
+          "CustomField21": {
+            "type": "boolean"
+          },
+          "CustomField22": {
+            "type": "boolean"
+          },
+          "UpdatedOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "TypeId",
+          "PackageName"
+        ]
+      },
+      "Resource": {
+        "title": "Resource",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Roles": {
+            "type": "string"
+          },
+          "IsOwner": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "System": {
+        "title": "System",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "Name"
+        ]
+      },
+      "Tax": {
+        "title": "Tax",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Rate": {
+            "type": "number"
+          },
+          "ProductTotal": {
+            "type": "number"
+          },
+          "LaborTotal": {
+            "type": "number"
+          },
+          "Total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "Name"
+        ]
+      },
+      "ProjectInfo": {
+        "title": "ProjectInfo",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "IntegrationProjectId": {
+            "type": "string"
+          },
+          "ClientId": {
+            "type": "string"
+          },
+          "Client": {
+            "type": "string"
+          },
+          "ClientNumber": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Number": {
+            "type": "string"
+          },
+          "Progress": {
+            "type": "string"
+          },
+          "Approved": {
+            "type": "boolean"
+          },
+          "CONumber": {
+            "type": "integer"
+          },
+          "CurrencyCode": {
+            "type": "string"
+          },
+          "Price": {
+            "type": "number"
+          },
+          "ImportedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PublishedOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "Project information."
+      },
+      "ProjectsResult": {
+        "title": "ProjectsResult",
+        "type": "object",
+        "properties": {
+          "Projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectInfo"
+            }
+          },
+          "TotalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "HttpResponseMessage": {
+        "title": "HttpResponseMessage",
+        "type": "object",
+        "x-tags": [
+          "general"
+        ],
+        "properties": {
+          "Version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "Content": {
+            "$ref": "#/components/schemas/HttpContent"
+          },
+          "StatusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "ReasonPhrase": {
+            "type": "string"
+          },
+          "Headers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "RequestMessage": {
+            "type": "string"
+          },
+          "IsSuccessStatusCode": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Version": {
+        "title": "Version",
+        "type": "object",
+        "x-tags": [
+          "general"
+        ],
+        "properties": {
+          "Major": {
+            "type": "integer"
+          },
+          "Minor": {
+            "type": "integer"
+          },
+          "Build": {
+            "type": "integer"
+          },
+          "Revision": {
+            "type": "integer"
+          },
+          "MajorRevision": {
+            "type": "integer"
+          },
+          "MinorRevision": {
+            "type": "integer"
+          }
+        }
+      },
+      "HttpContent": {
+        "title": "HttpContent",
+        "type": "object",
+        "properties": {
+          "Headers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "HttpStatusCode": {
+        "type": "integer",
+        "title": "HttpStatusCode",
+        "minimum": 100,
+        "maximum": 505,
+        "x-tags": [
+          "general"
+        ]
+      },
+      "HttpRequestMessage": {
+        "title": "HttpRequestMessage",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "Version": {
+            "$ref": "#/components/schemas/Version"
+          },
+          "Content": {
+            "$ref": "#/components/schemas/HttpContent"
+          },
+          "Method": {
+            "$ref": "#/components/schemas/HttpMethod"
+          },
+          "RequestUri": {
+            "type": "string"
+          },
+          "Headers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "Properties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-tags": [
+          "general"
+        ]
+      },
+      "HttpMethod": {
+        "title": "HttpMethod",
+        "type": "object",
+        "properties": {
+          "Method": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "title": "ProjectItem",
+        "additionalProperties": false,
+        "description": "A project item which can be product or labor or allowance or bundled cable or Placeholder",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "IntegrationProductId": {
+            "type": "string"
+          },
+          "Manufacturer": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "PartNumber": {
+            "type": "string"
+          },
+          "Category": {
+            "type": "string"
+          },
+          "Subcategory": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Msrp": {
+            "type": "number"
+          },
+          "UnitCost": {
+            "type": "number"
+          },
+          "UnitPrice": {
+            "type": "number"
+          },
+          "Phase": {
+            "type": "string"
+          },
+          "LaborHours": {
+            "type": "number"
+          },
+          "InstallPrice": {
+            "type": "number"
+          },
+          "AcctgName": {
+            "type": "string"
+          },
+          "Vendor": {
+            "type": "string"
+          },
+          "CustomField1": {
+            "type": "string"
+          },
+          "CustomField2": {
+            "type": "string"
+          },
+          "CustomField3": {
+            "type": "string"
+          },
+          "CustomField4": {
+            "type": "string"
+          },
+          "CustomField5": {
+            "type": "string"
+          },
+          "CustomField6": {
+            "type": "number"
+          },
+          "CustomField7": {
+            "type": "number"
+          },
+          "CustomField8": {
+            "type": "number"
+          },
+          "CustomField9": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField10": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField11": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField12": {
+            "type": "string"
+          },
+          "CustomField13": {
+            "type": "string"
+          },
+          "CustomField14": {
+            "type": "string"
+          },
+          "CustomField15": {
+            "type": "string"
+          },
+          "CustomField16": {
+            "type": "string"
+          },
+          "CustomField17": {
+            "type": "string"
+          },
+          "CustomField18": {
+            "type": "string"
+          },
+          "CustomField19": {
+            "type": "boolean"
+          },
+          "CustomField20": {
+            "type": "boolean"
+          },
+          "CustomField21": {
+            "type": "boolean"
+          },
+          "CustomField22": {
+            "type": "boolean"
+          },
+          "UpdatedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Approved": {
+            "type": "boolean"
+          },
+          "Discontinued": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  }
+}
