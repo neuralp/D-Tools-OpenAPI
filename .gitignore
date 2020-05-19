@@ -1,0 +1,5 @@
+# Ignore the generated API
+dtapi/
+
+# Ignore the downloaded Node Modules
+node_modules/
