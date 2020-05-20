@@ -26,12 +26,16 @@
     {
       "name": "general",
       "description": "General API usage"
+    },
+    {
+      "name": "product",
+      "description": "Part of the products"
     }
   ],
   "paths": {
     "/Subscribe/Project": {
       "get": {
-        "summary": "Get specific project",
+        "summary": "subscribeProject",
         "tags": [
           "project"
         ],
@@ -70,15 +74,6 @@
             "in": "query",
             "name": "getAdjustmentsByItem",
             "description": "getAdjustmentsByItem is an optional parameter. If true then adjustments are returned with each project item. If false the adjustments are aggreegated and returend as project items."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-DTSI-ApiKey",
-            "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration.",
-            "required": true
           }
         ],
         "responses": {
@@ -99,7 +94,7 @@
     },
     "/Subscribe/Projects": {
       "get": {
-        "summary": "Get user projects",
+        "summary": "subscribeProjects",
         "tags": [
           "project"
         ],
@@ -120,16 +115,10 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-DTSI-ApiKey",
-            "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration.",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "clients",
@@ -137,7 +126,10 @@
           },
           {
             "schema": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "in": "query",
             "name": "progresses",
@@ -179,10 +171,14 @@
             "description": "The page size."
           }
         ]
-      },
+      }
+    },
+    "/Subscribe/Projects/MarkAsImported": {
       "put": {
-        "summary": "",
-        "operationId": "put-Subscribe-Projects",
+        "summary": "markProjectAsImported",
+        "tags": [
+          "product"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -195,25 +191,16 @@
             }
           }
         },
-        "description": "Mark a project as imported for a given project id.",
+        "operationId": "put-Subscribe-ProductCatalogs",
         "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "X-DTSI-ApiKey",
-            "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration.",
-            "required": true
-          },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
             "name": "id",
-            "description": "The project id.",
-            "required": true
+            "required": true,
+            "description": "The project id."
           },
           {
             "schema": {
@@ -224,8 +211,130 @@
             "description": "coNumber is an optional parameter and is the Change Order Number. For approved projects you can pass the change order number."
           }
         ],
+        "description": "Mark a project as imported for a given project id."
+      },
+      "parameters": []
+    },
+    "/Subscribe/ProductCatalogs": {
+      "get": {
+        "summary": "getProductCatalogs",
         "tags": [
-          "project"
+          "product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogResult"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-Subscribe-ProductCatalogs",
+        "description": "Get product catalogs published by a SI user.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean",
+              "default": "false"
+            },
+            "in": "query",
+            "name": "includeImported",
+            "description": "Boolean. Include already imported product catalogs. Optional with default value false which means by default you will only see product catalogs which are not imported."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "searchText",
+            "description": "The search text."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "pageNumber",
+            "description": "The page number."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "in": "query",
+            "name": "pageSize",
+            "description": "The page size."
+          }
+        ]
+      }
+    },
+    "/Subscribe/ProductCatalog": {
+      "get": {
+        "summary": "getProductCatalog",
+        "tags": [
+          "product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCatalog"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-Subscribe-ProductCatalog",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "description": "Get a product catalog for a given catalog id.  "
+      }
+    },
+    "/Subscribe/ProductCatalogs/MarkAsImported": {
+      "put": {
+        "summary": "markProductAsImported",
+        "tags": [
+          "product"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpResponseMessage"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-Subscribe-ProductCatalogs-MarkAsImported",
+        "description": "Mark a product catalog as imported for a given catalog id.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "required": true
+          }
         ]
       }
     }
@@ -1039,12 +1148,13 @@
             }
           },
           "RequestMessage": {
-            "type": "string"
+            "$ref": "#/components/schemas/HttpRequestMessage"
           },
           "IsSuccessStatusCode": {
             "type": "boolean"
           }
-        }
+        },
+        "description": ""
       },
       "Version": {
         "title": "Version",
@@ -1282,7 +1392,81 @@
         "required": [
           "id"
         ]
+      },
+      "CatalogInfo": {
+        "title": "CatalogInfo",
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ImportedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PublishedOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "Catalog Information"
+      },
+      "CatalogResult": {
+        "title": "CatalogResult",
+        "type": "object",
+        "properties": {
+          "Catalogs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CatalogInfo"
+            }
+          },
+          "TotalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "ProductCatalog": {
+        "title": "ProductCatalog",
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "Products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        },
+        "description": "Product catalog object"
+      }
+    },
+    "securitySchemes": {
+      "X-DTSI-ApiKey": {
+        "name": "API Key",
+        "type": "apiKey",
+        "in": "header",
+        "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration."
       }
     }
-  }
+  },
+  "security": [
+    {
+      "X-DTSI-ApiKey": []
+    }
+  ]
 }
