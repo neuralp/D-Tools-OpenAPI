@@ -191,7 +191,7 @@
             }
           }
         },
-        "operationId": "put-Subscribe-ProductCatalogs",
+        "operationId": "put-Subscribe-Projects-MarkAsImported",
         "parameters": [
           {
             "schema": {
@@ -308,7 +308,7 @@
     },
     "/Subscribe/ProductCatalogs/MarkAsImported": {
       "put": {
-        "summary": "markProductAsImported",
+        "summary": "markProductCatalogAsImported",
         "tags": [
           "product"
         ],
@@ -1456,8 +1456,8 @@
       }
     },
     "securitySchemes": {
-      "X-DTSI-ApiKey": {
-        "name": "API Key",
+      "DTools-API-Key": {
+        "name": "X-DTSI-ApiKey",
         "type": "apiKey",
         "in": "header",
         "description": "All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the 'Manage Integrations' feature.\nAn API key is specific to a SI user and an integration."
@@ -1466,7 +1466,7 @@
   },
   "security": [
     {
-      "X-DTSI-ApiKey": []
+      "DTools-API-Key": []
     }
   ]
 }
