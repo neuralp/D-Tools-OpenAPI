@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "pretty": true,
+        "sourceMap": true,
+        "target": "es6",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "outDir": "./output",
+        "allowUmdGlobalAccess": true,
+        "lib": ["DOM"]
+    },
+    "include": [
+        "test/*.ts",
+        "test/**/*.ts",
+        "dtapi/*.ts",
+        "dtapi/**/*.ts",
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

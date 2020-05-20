@@ -402,7 +402,7 @@
         "title": "Location",
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "Name": {
@@ -419,7 +419,7 @@
           }
         },
         "required": [
-          "id"
+          "Id"
         ]
       },
       "MiscItem": {
@@ -467,7 +467,7 @@
         "type": "object",
         "x-examples": {},
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "Items": {
@@ -739,7 +739,7 @@
         "additionalProperties": false,
         "description": "A project item which can be product or labor or allowance or bundled cable or Placeholder",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "TypeId": {
@@ -982,7 +982,7 @@
           }
         },
         "required": [
-          "id",
+          "Id",
           "TypeId",
           "PackageName"
         ]
@@ -1013,7 +1013,7 @@
         "title": "System",
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "Name": {
@@ -1024,7 +1024,7 @@
           }
         },
         "required": [
-          "id",
+          "Id",
           "Name"
         ]
       },
@@ -1032,7 +1032,7 @@
         "title": "Tax",
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "Name": {
@@ -1052,7 +1052,7 @@
           }
         },
         "required": [
-          "id",
+          "Id",
           "Name"
         ]
       },
@@ -1060,7 +1060,7 @@
         "title": "ProjectInfo",
         "type": "object",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "IntegrationProjectId": {
@@ -1261,7 +1261,7 @@
         "additionalProperties": false,
         "description": "A project item which can be product or labor or allowance or bundled cable or Placeholder",
         "properties": {
-          "id": {
+          "Id": {
             "type": "string"
           },
           "IntegrationProductId": {
@@ -1390,7 +1390,7 @@
           }
         },
         "required": [
-          "id"
+          "Id"
         ]
       },
       "CatalogInfo": {
