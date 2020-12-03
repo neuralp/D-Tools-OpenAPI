@@ -467,14 +467,14 @@
         "type": "object",
         "x-examples": {},
         "properties": {
-          "Id": {
-            "type": "string"
-          },
           "Items": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ProjectItem"
             }
+          },
+          "Id": {
+            "type": "string"
           },
           "Client": {
             "type": "string"
@@ -510,22 +510,32 @@
             "type": "string"
           },
           "Margin": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "Markup": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "Tax": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
+          },
+          "Price": {
+            "type": "number",
+            "format": "float"
           },
           "Budget": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "StartDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "EndDate": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "ScopeOfWork": {
             "type": "string"
@@ -540,7 +550,7 @@
             "$ref": "#/components/schemas/Address"
           },
           "IsItemLevelTax": {
-            "type": "string"
+            "type": "boolean"
           },
           "ProductTaxId": {
             "type": "string"
@@ -549,13 +559,13 @@
             "type": "string"
           },
           "Approved": {
-            "type": "string"
+            "type": "boolean"
           },
           "IsChangeOrder": {
-            "type": "string"
+            "type": "boolean"
           },
           "CONumber": {
-            "type": "string"
+            "type": "number"
           },
           "COStatus": {
             "type": "string"
@@ -567,10 +577,12 @@
             "type": "string"
           },
           "COAcceptedOn": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "COCreatedOn": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "CustomField1": {
             "type": "string"
@@ -615,16 +627,20 @@
             "type": "string"
           },
           "CustomField15": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "CustomField16": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "CustomField17": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "CustomField18": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "CustomField19": {
             "type": "string",
@@ -653,6 +669,18 @@
           },
           "CustomField26": {
             "type": "boolean"
+          },
+          "CustomField27": {
+            "type": "string"
+          },
+          "CustomField28": {
+            "type": "string"
+          },
+          "CustomField29": {
+            "type": "string"
+          },
+          "CustomField30": {
+            "type": "string"
           },
           "Contacts": {
             "type": "array",
@@ -684,28 +712,16 @@
               "$ref": "#/components/schemas/Tax"
             }
           },
-          "MiscItems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MiscItem"
-            }
-          },
-          "CustomField27": {
-            "type": "string"
-          },
-          "CustomField28": {
-            "type": "string"
-          },
-          "CustomField29": {
-            "type": "string"
-          },
-          "CustomField30": {
-            "type": "string"
-          },
           "PaymentTerms": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PaymentTerm"
+            }
+          },
+          "MiscItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MiscItem"
             }
           },
           "IntegrationProjectId": {
@@ -730,7 +746,8 @@
           }
         },
         "required": [
-          "Client"
+          "Client",
+          "Name"
         ]
       },
       "ProjectItem": {
@@ -752,10 +769,22 @@
           "LaborType": {
             "type": "string"
           },
+          "SIItemId": {
+            "type": "string"
+          },
+          "COChangeTypeId": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2,
+            "description": "1 = Added on Change Order, 2 = Deleted on Change Order."
+          },
           "Manufacturer": {
             "type": "string"
           },
           "Model": {
+            "type": "string"
+          },
+          "PackageName": {
             "type": "string"
           },
           "PartNumber": {
@@ -777,6 +806,9 @@
             "type": "string"
           },
           "IPAddress": {
+            "type": "string"
+          },
+          "IPAddress2": {
             "type": "string"
           },
           "MACAddress1": {
@@ -839,6 +871,9 @@
           "Vendor": {
             "type": "string"
           },
+          "BulkWire": {
+            "type": "boolean"
+          },
           "LocationId": {
             "type": "string"
           },
@@ -872,6 +907,10 @@
           "Picked": {
             "type": "boolean"
           },
+          "PickedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "Installed": {
             "type": "boolean"
           },
@@ -881,6 +920,13 @@
           },
           "InstalledNotes": {
             "type": "string"
+          },
+          "TrackingNumber": {
+            "type": "string"
+          },
+          "UpdatedOn": {
+            "type": "string",
+            "format": "date-time"
           },
           "CustomField1": {
             "type": "string"
@@ -927,31 +973,6 @@
           "CustomField14": {
             "type": "string"
           },
-          "COChangeTypeId": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 2,
-            "description": "1 = Added on Change Order, 2 = Deleted on Change Order."
-          },
-          "PackageName": {
-            "type": "string"
-          },
-          "IPAddress2": {
-            "type": "string"
-          },
-          "BulkWire": {
-            "type": "boolean"
-          },
-          "PickedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "TrackingNumber": {
-            "type": "string"
-          },
-          "SIItemId": {
-            "type": "string"
-          },
           "CustomField15": {
             "type": "string"
           },
@@ -976,9 +997,8 @@
           "CustomField22": {
             "type": "boolean"
           },
-          "UpdatedOn": {
-            "type": "string",
-            "format": "date-time"
+          "UnitPriceRounded": {
+            "type": "number"
           }
         },
         "required": [
@@ -1059,6 +1079,7 @@
       "ProjectInfo": {
         "title": "ProjectInfo",
         "type": "object",
+        "description": "Project information.",
         "properties": {
           "Id": {
             "type": "string"
@@ -1094,7 +1115,8 @@
             "type": "string"
           },
           "Price": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "ImportedOn": {
             "type": "string",
@@ -1104,8 +1126,7 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "description": "Project information."
+        }
       },
       "ProjectsResult": {
         "title": "ProjectsResult",
