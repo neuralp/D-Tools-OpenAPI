@@ -1,3 +1,3 @@
-declare type GlobalFetch = { 
-    fetch: (url: RequestInfo, init?: RequestInit) => Promise<Response>
-}
+declare type GlobalFetch = {
+  fetch: (url: RequestInfo, init?: RequestInit) => Promise<Response>;
+};
