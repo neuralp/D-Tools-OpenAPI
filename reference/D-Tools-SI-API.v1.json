@@ -473,13 +473,25 @@
               "$ref": "#/components/schemas/ProjectItem"
             }
           },
+          "Packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Package"
+            }
+          },
           "Id": {
+            "type": "string"
+          },
+          "IntegrationProjectId": {
             "type": "string"
           },
           "Client": {
             "type": "string"
           },
           "ClientId": {
+            "type": "string"
+          },
+          "IntegrationClientId": {
             "type": "string"
           },
           "ClientNumber": {
@@ -497,17 +509,29 @@
           "AssignedTo": {
             "type": "string"
           },
+          "SalesRep": {
+            "type": "string"
+          },
+          "ProjectManager": {
+            "type": "string"
+          },
+          "Designer": {
+            "type": "string"
+          },
           "CurrencyCode": {
             "type": "string"
           },
           "CurrencyRate": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "Cost": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "PriceWithoutTax": {
-            "type": "string"
+            "type": "number",
+            "format": "float"
           },
           "Margin": {
             "type": "number",
@@ -525,15 +549,33 @@
             "type": "number",
             "format": "float"
           },
+          "Hours": {
+            "type": "number",
+            "format": "float"
+          },
           "Budget": {
             "type": "number",
             "format": "float"
+          },
+          "ProductPriceType": {
+            "type": "string"
+          },
+          "ClientPONumber": {
+            "type": "string"
           },
           "StartDate": {
             "type": "string",
             "format": "date-time"
           },
           "EndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "EstimatedCloseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CloseDate": {
             "type": "string",
             "format": "date-time"
           },
@@ -561,11 +603,15 @@
           "Approved": {
             "type": "boolean"
           },
+          "ApprovedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
           "IsChangeOrder": {
             "type": "boolean"
           },
           "CONumber": {
-            "type": "number"
+            "type": "integer"
           },
           "COStatus": {
             "type": "string"
@@ -682,6 +728,78 @@
           "CustomField30": {
             "type": "string"
           },
+          "CustomField31": {
+            "type": "string"
+          },
+          "CustomField32": {
+            "type": "string"
+          },
+          "CustomField33": {
+            "type": "string"
+          },
+          "CustomField34": {
+            "type": "string"
+          },
+          "CustomField35": {
+            "type": "string"
+          },
+          "CustomField36": {
+            "type": "string"
+          },
+          "CustomField37": {
+            "type": "string"
+          },
+          "CustomField38": {
+            "type": "string"
+          },
+          "CustomField39": {
+            "type": "string"
+          },
+          "CustomField40": {
+            "type": "string"
+          },
+          "CustomField41": {
+            "type": "string"
+          },
+          "CustomField42": {
+            "type": "string"
+          },
+          "CustomField43": {
+            "type": "string"
+          },
+          "CustomField44": {
+            "type": "string"
+          },
+          "CustomField45": {
+            "type": "string"
+          },
+          "CustomField46": {
+            "type": "string"
+          },
+          "CustomField47": {
+            "type": "string"
+          },
+          "CustomField48": {
+            "type": "string"
+          },
+          "CustomField49": {
+            "type": "string"
+          },
+          "CustomField50": {
+            "type": "string"
+          },
+          "CustomField51": {
+            "type": "string"
+          },
+          "CustomField52": {
+            "type": "string"
+          },
+          "CustomField53": {
+            "type": "string"
+          },
+          "CustomField54": {
+            "type": "string"
+          },
           "Contacts": {
             "type": "array",
             "items": {
@@ -723,26 +841,6 @@
             "items": {
               "$ref": "#/components/schemas/MiscItem"
             }
-          },
-          "IntegrationProjectId": {
-            "type": "string"
-          },
-          "IntegrationClientId": {
-            "type": "string"
-          },
-          "ProductPriceType": {
-            "type": "string"
-          },
-          "ClientPONumber": {
-            "type": "string"
-          },
-          "EstimatedCloseDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "CloseDate": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "required": [
@@ -755,6 +853,100 @@
         "title": "ProjectItem",
         "additionalProperties": false,
         "description": "A project item which can be product or labor or allowance or bundled cable or Placeholder",
+        "x-examples": {
+          "example-1": {
+            "Id": "1",
+            "TypeId": 1,
+            "SIItemId": "d772d141-764c-472f-a8a4-720897c9a96c",
+            "LaborType": null,
+            "COChangeTypeId": null,
+            "Manufacturer": "Aja",
+            "Model": "KUMO-1616-12G",
+            "PackageName": null,
+            "PartNumber": null,
+            "Category": "Video",
+            "Subcategory": "Switcher",
+            "Description": "Compact 16 x 16 router for 12G-SDI.",
+            "ComponentId": "189",
+            "SerialNumber": null,
+            "IPAddress": null,
+            "IPAddress2": null,
+            "MACAddress1": null,
+            "MACAddress2": null,
+            "IsOfe": false,
+            "IsNonBillable": false,
+            "Quantity": 1,
+            "UnitCost": 2255.05,
+            "UnitPrice": 2495,
+            "UnitPriceRounded": 2495,
+            "Discount": 0,
+            "LaborCalculationMethodId": null,
+            "Phase": "Finish",
+            "LaborHours": 1,
+            "ProductAdjustment": 0,
+            "MiscPartAdjustment": 0,
+            "LaborAdjustment": 0,
+            "InstallPrice": 2684.33,
+            "IsTaxable": true,
+            "TaxId": null,
+            "AvalaraTaxCode": null,
+            "AvalaraLaborTaxCode": null,
+            "AcctgName": null,
+            "Vendor": null,
+            "DoNotOrder": false,
+            "BulkWire": false,
+            "LocationId": "24",
+            "SystemId": "18",
+            "ParentId": null,
+            "CatalogId": "33d09408-cb5e-4240-aab7-145846e27755",
+            "PackageId": null,
+            "SolutionId": null,
+            "OrderStatus": null,
+            "OrderNumber": null,
+            "OrderedDate": null,
+            "OrderedDateTicks": 0,
+            "ExpectedDeliveryDate": null,
+            "ExpectedDeliveryDateTicks": 0,
+            "ReceivedDate": null,
+            "ReceivedDateTicks": 0,
+            "Picked": false,
+            "PickedDate": null,
+            "PickedDateTicks": 0,
+            "Installed": false,
+            "InstalledDate": null,
+            "InstalledDateTicks": 0,
+            "InstalledNotes": null,
+            "TrackingNumber": null,
+            "UpdatedOn": "2021-12-07T21:51:13.7797638",
+            "UpdatedOnTicks": 637745106737797600,
+            "CustomField1": null,
+            "CustomField2": null,
+            "CustomField3": null,
+            "CustomField4": null,
+            "CustomField5": null,
+            "CustomField6": null,
+            "CustomField7": null,
+            "CustomField8": null,
+            "CustomField9": null,
+            "CustomField10": null,
+            "CustomField11": null,
+            "CustomField12": null,
+            "CustomField13": null,
+            "CustomField14": null,
+            "CustomField15": null,
+            "CustomField16": null,
+            "CustomField17": null,
+            "CustomField18": null,
+            "CustomField19": null,
+            "CustomField20": null,
+            "CustomField21": null,
+            "CustomField22": null,
+            "CustomField23": null,
+            "CustomField24": null,
+            "CustomField25": null,
+            "CustomField26": null
+          }
+        },
         "properties": {
           "Id": {
             "type": "string"
@@ -832,8 +1024,23 @@
           "UnitPrice": {
             "type": "number"
           },
+          "OFE": {
+            "type": "boolean"
+          },
+          "UnitPriceRounded": {
+            "type": "number"
+          },
           "Discount": {
             "type": "number"
+          },
+          "LaborCalculationMethodId": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "description": "1 = Fixed, 2 = Variable, 3 = Phase"
           },
           "Phase": {
             "type": "string"
@@ -871,6 +1078,9 @@
           "Vendor": {
             "type": "string"
           },
+          "DoNotOrder": {
+            "type": "boolean"
+          },
           "BulkWire": {
             "type": "boolean"
           },
@@ -885,6 +1095,12 @@
           },
           "CatelogId": {
             "type": "string"
+          },
+          "PackageId": {
+            "type": "integer"
+          },
+          "SolutionId": {
+            "type": "integer"
           },
           "OrderStatus": {
             "type": "string"
@@ -997,14 +1213,57 @@
           "CustomField22": {
             "type": "boolean"
           },
-          "UnitPriceRounded": {
-            "type": "number"
+          "CustomField23": {
+            "type": "string"
+          },
+          "CustomField24": {
+            "type": "string"
+          },
+          "CustomField25": {
+            "type": "string"
+          },
+          "CustomField26": {
+            "type": "string"
           }
         },
         "required": [
           "Id",
           "TypeId",
           "PackageName"
+        ]
+      },
+      "Package": {
+        "title": "Package",
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer"
+          },
+          "TypeId": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "description": "1 = Package, 2 = Solution"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "ComponentId": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "ParentId": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Id",
+          "TypeId",
+          "Name"
         ]
       },
       "Resource": {
@@ -1202,7 +1461,8 @@
           "MinorRevision": {
             "type": "integer"
           }
-        }
+        },
+        "x-examples": {}
       },
       "HttpContent": {
         "title": "HttpContent",
@@ -1278,9 +1538,9 @@
       },
       "Product": {
         "type": "object",
-        "title": "ProjectItem",
+        "title": "Product",
         "additionalProperties": false,
-        "description": "A project item which can be product or labor or allowance or bundled cable or Placeholder",
+        "description": "A product is an item from the product database (versus the individual project).",
         "properties": {
           "Id": {
             "type": "string"
@@ -1307,27 +1567,106 @@
             "type": "string"
           },
           "Msrp": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "UnitCost": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "UnitPrice": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
+          },
+          "OFE": {
+            "type": "boolean"
           },
           "Phase": {
             "type": "string"
           },
           "LaborHours": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "InstallPrice": {
-            "type": "number"
+            "type": "number",
+            "format": "float"
           },
           "AcctgName": {
             "type": "string"
           },
           "Vendor": {
+            "type": "string"
+          },
+          "OrderUom": {
+            "type": "string"
+          },
+          "OrderUomUnits": {
+            "type": "integer"
+          },
+          "DoNotOrder": {
+            "type": "boolean"
+          },
+          "Height": {
+            "type": "number",
+            "format": "float"
+          },
+          "Width": {
+            "type": "number",
+            "format": "float"
+          },
+          "Depth": {
+            "type": "number",
+            "format": "float"
+          },
+          "Weight": {
+            "type": "number",
+            "format": "float"
+          },
+          "RackMounted": {
+            "type": "boolean"
+          },
+          "RackUnits": {
+            "type": "integer"
+          },
+          "Amps": {
+            "type": "number",
+            "format": "float"
+          },
+          "Volts": {
+            "type": "number",
+            "format": "float"
+          },
+          "Watts": {
+            "type": "number",
+            "format": "float"
+          },
+          "Btu": {
+            "type": "number",
+            "format": "float"
+          },
+          "Dispersion": {
+            "type": "string"
+          },
+          "BulkWire": {
+            "type": "boolean"
+          },
+          "InputTerminals": {
+            "type": "string"
+          },
+          "InputSignals": {
+            "type": "string"
+          },
+          "InputLabels": {
+            "type": "string"
+          },
+          "OutputTerminals": {
+            "type": "string"
+          },
+          "OutputSignals": {
+            "type": "string"
+          },
+          "OutputLabels": {
             "type": "string"
           },
           "CustomField1": {
@@ -1398,6 +1737,18 @@
           },
           "CustomField22": {
             "type": "boolean"
+          },
+          "CustomField23": {
+            "type": "string"
+          },
+          "CustomField24": {
+            "type": "string"
+          },
+          "CustomField25": {
+            "type": "string"
+          },
+          "CustomField26": {
+            "type": "string"
           },
           "UpdatedOn": {
             "type": "string",
