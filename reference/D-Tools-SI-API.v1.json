@@ -1116,9 +1116,17 @@
             "type": "string",
             "format": "date-time"
           },
+          "ExpectedDeliveryDateTicks": {
+            "type": "integer",
+            "format": "int64"
+          },
           "ReceivedDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "ReceivedDateTicks": {
+            "type": "integer",
+            "format": "int64"
           },
           "Picked": {
             "type": "boolean"
@@ -1127,12 +1135,20 @@
             "type": "string",
             "format": "date-time"
           },
+          "PickedDateTicks": {
+            "type": "integer",
+            "format": "int64"
+          },
           "Installed": {
             "type": "boolean"
           },
           "InstalledDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "InstalledDateTicks": {
+            "type": "integer",
+            "format": "int64"
           },
           "InstalledNotes": {
             "type": "string"
