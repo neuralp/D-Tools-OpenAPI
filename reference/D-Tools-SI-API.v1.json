@@ -1093,7 +1093,7 @@
           "ParentId": {
             "type": "string"
           },
-          "CatelogId": {
+          "CatalogId": {
             "type": "string"
           },
           "PackageId": {
@@ -1143,6 +1143,10 @@
           "UpdatedOn": {
             "type": "string",
             "format": "date-time"
+          },
+          "UpdatedOnTicks": {
+            "type": "integer",
+            "format": "int64"
           },
           "CustomField1": {
             "type": "string"
