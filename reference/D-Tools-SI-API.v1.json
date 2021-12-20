@@ -1112,6 +1112,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "OrderedDateTicks": {
+            "type": "integer",
+            "format": "int64"
+          },
           "ExpectedDeliveryDate": {
             "type": "string",
             "format": "date-time"
