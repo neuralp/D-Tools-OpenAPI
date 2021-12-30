@@ -176,9 +176,6 @@
     "/Subscribe/Projects/MarkAsImported": {
       "put": {
         "summary": "markProjectAsImported",
-        "tags": [
-          "product"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -211,7 +208,10 @@
             "description": "coNumber is an optional parameter and is the Change Order Number. For approved projects you can pass the change order number."
           }
         ],
-        "description": "Mark a project as imported for a given project id."
+        "description": "Mark a project as imported for a given project id.",
+        "tags": [
+          "project"
+        ]
       },
       "parameters": []
     },
