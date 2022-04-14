@@ -503,6 +503,9 @@
           "Number": {
             "type": "string"
           },
+          "QuantityBased": {
+            "type": "boolean"
+          },
           "Progress": {
             "type": "string"
           },
@@ -613,6 +616,9 @@
           "CONumber": {
             "type": "integer"
           },
+          "COName": {
+            "type": "string"
+          },
           "COStatus": {
             "type": "string"
           },
@@ -623,6 +629,10 @@
             "type": "string"
           },
           "COAcceptedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CORejectedOn": {
             "type": "string",
             "format": "date-time"
           },
@@ -958,10 +968,10 @@
             "maximum": 5,
             "description": "1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder"
           },
-          "LaborType": {
+          "SIItemId": {
             "type": "string"
           },
-          "SIItemId": {
+          "LaborType": {
             "type": "string"
           },
           "COChangeTypeId": {
@@ -969,6 +979,9 @@
             "minimum": 1,
             "maximum": 2,
             "description": "1 = Added on Change Order, 2 = Deleted on Change Order."
+          },
+          "ManufacturerId": {
+            "type": "string"
           },
           "Manufacturer": {
             "type": "string"
@@ -1023,9 +1036,6 @@
           },
           "UnitPrice": {
             "type": "number"
-          },
-          "OFE": {
-            "type": "boolean"
           },
           "UnitPriceRounded": {
             "type": "number"
@@ -1120,17 +1130,9 @@
             "type": "string",
             "format": "date-time"
           },
-          "ExpectedDeliveryDateTicks": {
-            "type": "integer",
-            "format": "int64"
-          },
           "ReceivedDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "ReceivedDateTicks": {
-            "type": "integer",
-            "format": "int64"
           },
           "Picked": {
             "type": "boolean"
@@ -1139,20 +1141,12 @@
             "type": "string",
             "format": "date-time"
           },
-          "PickedDateTicks": {
-            "type": "integer",
-            "format": "int64"
-          },
           "Installed": {
             "type": "boolean"
           },
           "InstalledDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "InstalledDateTicks": {
-            "type": "integer",
-            "format": "int64"
           },
           "InstalledNotes": {
             "type": "string"
@@ -1163,10 +1157,6 @@
           "UpdatedOn": {
             "type": "string",
             "format": "date-time"
-          },
-          "UpdatedOnTicks": {
-            "type": "integer",
-            "format": "int64"
           },
           "CustomField1": {
             "type": "string"
@@ -1271,10 +1261,10 @@
             ],
             "description": "1 = Package, 2 = Solution"
           },
-          "Name": {
+          "ComponentId": {
             "type": "string"
           },
-          "ComponentId": {
+          "Name": {
             "type": "string"
           },
           "Description": {
@@ -1282,6 +1272,87 @@
           },
           "ParentId": {
             "type": "integer"
+          },
+          "CustomField1": {
+            "type": "string"
+          },
+          "CustomField2": {
+            "type": "string"
+          },
+          "CustomField3": {
+            "type": "string"
+          },
+          "CustomField4": {
+            "type": "string"
+          },
+          "CustomField5": {
+            "type": "string"
+          },
+          "CustomField6": {
+            "type": "number"
+          },
+          "CustomField7": {
+            "type": "number"
+          },
+          "CustomField8": {
+            "type": "number"
+          },
+          "CustomField9": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField10": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField11": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CustomField12": {
+            "type": "string"
+          },
+          "CustomField13": {
+            "type": "string"
+          },
+          "CustomField14": {
+            "type": "string"
+          },
+          "CustomField15": {
+            "type": "string"
+          },
+          "CustomField16": {
+            "type": "string"
+          },
+          "CustomField17": {
+            "type": "string"
+          },
+          "CustomField18": {
+            "type": "string"
+          },
+          "CustomField19": {
+            "type": "boolean"
+          },
+          "CustomField20": {
+            "type": "boolean"
+          },
+          "CustomField21": {
+            "type": "boolean"
+          },
+          "CustomField22": {
+            "type": "boolean"
+          },
+          "CustomField23": {
+            "type": "string"
+          },
+          "CustomField24": {
+            "type": "string"
+          },
+          "CustomField25": {
+            "type": "string"
+          },
+          "CustomField26": {
+            "type": "string"
           }
         },
         "required": [
